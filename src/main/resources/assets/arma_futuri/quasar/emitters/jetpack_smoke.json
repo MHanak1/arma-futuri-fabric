@@ -1,0 +1,11 @@
+{
+  "max_lifetime": 20,
+  "loop": true,
+  "rate": 1,
+  "count": 8,
+  "emitter_settings": {
+    "shape": "arma_futuri:jetpack_smoke",
+    "particle_settings": "arma_futuri:jetpack_smoke"
+  },
+  "particle_data": "arma_futuri:jetpack_smoke"
+}

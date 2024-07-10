@@ -1,0 +1,20 @@
+{
+  "render_style": "CUBE",
+  "init_modules": [
+    "arma_futuri:jetpack_light"
+
+  ],
+  "update_modules": [
+  ],
+  "collision_modules": [
+  ],
+  "forces": [
+    "arma_futuri:force/drag/jetpack_smoke"
+  ],
+  "render_modules": [
+    "arma_futuri:color/jetpack_smoke"
+  ],
+  "face_velocity": true,
+  "velocity_stretch_factor": 1.0,
+  "should_collide": false
+}

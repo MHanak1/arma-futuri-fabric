@@ -1,0 +1,20 @@
+{
+  "vertex": "arma_futuri:map",
+  "tesselation_control": "arma_futuri:map",
+  "tesselation_evaluation": "arma_futuri:map",
+  "fragment": "arma_futuri:map",
+  "definitions": [
+    {
+      "MIN_TESS_LEVEL": 4
+    },
+    {
+      "MAX_TESS_LEVEL": 64
+    },
+    {
+      "MIN_DISTANCE": 1
+    },
+    {
+      "MAX_DISTANCE": 6
+    }
+  ]
+}

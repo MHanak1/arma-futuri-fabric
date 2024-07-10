@@ -1,0 +1,9 @@
+{
+  "vertex": "arma_futuri:entity/rendertype_entity_cutout_no_cull",
+  "tesselation_control": "arma_futuri:entity/rendertype_entity_cutout_no_cull",
+  "tesselation_evaluation": "arma_futuri:entity/rendertype_entity_cutout_no_cull",
+  "fragment": "arma_futuri:entity/rendertype_entity_cutout_no_cull",
+  "textures": {
+    "HeightMap": "arma_futuri:textures/misc/heightmap.png"
+  }
+}

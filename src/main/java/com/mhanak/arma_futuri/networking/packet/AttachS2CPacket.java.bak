@@ -1,0 +1,35 @@
+package com.mhanak.arma_futuri.networking.packet;
+
+import com.mhanak.arma_futuri.FuturArmsMod;
+import com.mhanak.arma_futuri.util.IEntityAccess;
+import com.mhanak.arma_futuri.util.ILivingEntityAccess;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+
+import java.util.UUID;
+
+public class AttachS2CPacket {
+    public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+        FuturArmsMod.LOGGER.info("Recieved packet");
+
+        UUID playerUUID = buf.readUuid();
+        int attachingEntityId =  buf.readInt();
+
+        PlayerEntity player = client.player.getWorld().getPlayerByUuid(playerUUID);
+        Entity attachingEntity = client.world.getEntityById(attachingEntityId);
+
+        FuturArmsMod.LOGGER.info("Player with UUID {} {}, entity with ID {} {}", playerUUID, player == null ? "not found" : "found" , attachingEntityId, attachingEntity == null ? "not found" : "found");
+
+        if (player != null && attachingEntity != null) {
+            FuturArmsMod.LOGGER.info("Attached " + player + " to " + attachingEntity);
+            ((ILivingEntityAccess)attachingEntity).attachToPlayer(player);
+        }else{
+            FuturArmsMod.LOGGER.error("one of the entities not found");
+        }
+
+    }
+}

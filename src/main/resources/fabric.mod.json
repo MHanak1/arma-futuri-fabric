@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "veil-example-mod",
+	"id": "arma_futuri",
 	"version": "${version}",
-	"name": "Veil Example Mod",
-	"description": "Example/Testing mod that uses Veil",
+	"name": "Arma Futuri",
+	"description": "A Minecraft mod that adds sci-fi weapons, armor and other items",
 	"authors": [
-		"Ocelot"
+		"MHanak"
 	],
 	"contact": {
 	},
@@ -13,20 +13,23 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"foundry.veil.example.VeilExampleMod"
+			"com.mhanak.arma_futuri.ArmaFuturiMod"
 		],
 		"client": [
-			"foundry.veil.example.VeilExampleModClient"
+			"com.mhanak.arma_futuri.ArmaFuturiModClient"
 		]
 	},
 	"mixins": [
-		"veil-example-mod.mixins.json"
+		"arma_futuri.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.9",
 		"minecraft": "~1.20.1",
-		"veil": ">=1.0.0",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"geckolib": ">=4.4.0"
+	},
+	"recommends": {
+		"tooltipfix": "*"
 	}
 }

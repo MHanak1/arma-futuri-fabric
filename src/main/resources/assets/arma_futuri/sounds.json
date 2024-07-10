@@ -1,0 +1,26 @@
+{
+  "jetpack": {
+    "subtitle": "sound.arma_futuri.jetpack",
+    "sounds": [
+      "arma_futuri:jetpack"
+    ]
+  },
+  "charge_rifle_shot": {
+    "subtitle": "sound.arma_futuri.charge_rifle_shot",
+    "sounds": [
+      "arma_futuri:charge_rifle_shot"
+    ]
+  },
+  "charge_marksman_rifle_shot": {
+    "subtitle": "sound.arma_futuri.charge_marksman_rifle_shot",
+    "sounds": [
+      "arma_futuri:charge_marksman_rifle_shot"
+    ]
+  },
+  "notify_reloaded": {
+    "subtitle": "sound.arma_futuri.notify_reloaded",
+    "sounds": [
+      "arma_futuri:notify_reloaded"
+    ]
+  }
+}

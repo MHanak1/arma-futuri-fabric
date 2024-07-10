@@ -1,0 +1,44 @@
+{
+  "arma_futuri.items": "Arma Futuri",
+  "key.category.arma_futuri.arma_futuri": "arma_futuri",
+
+  "key.arma_futuri.toggle_flashlight": "Toggle Flashlight",
+  "key.arma_futuri.toggle_shield": "Toggle Shield",
+
+  "death.attack.rifle": "%s was shot by %s",
+
+  "block.arma_futuri.mirror": "Mirror Example",
+
+  "sound.arma_futuri.charge_rifle_shot": "Charge Rifle",
+  "sound.arma_futuri.jetpack": "Jetpack",
+
+  "item.arma_futuri.light_combat_helmet": "Light Combat Helmet",
+  "item.arma_futuri.light_combat_helmet.description": "A light yet durable helmet made using titanium based armor plates. Offers basic protection from blunt and sharp objects\nHas a built-in flashlight.",
+
+  "item.arma_futuri.light_combat_chestplate": "Light Combat Chestplate",
+  "item.arma_futuri.light_combat_chestplate.description": "A light chestplate used by recon troops, made using titanium based armor plates. Has one expansion slot.",
+
+  "item.arma_futuri.light_combat_leggings": "Light Combat Leggings",
+  "item.arma_futuri.light_combat_leggings.description": "Lightly armored leggings with basic hydraulics allowing for slightly faster walking speed.",
+
+  "item.arma_futuri.light_combat_boots": "Light Combat Boots",
+  "item.arma_futuri.light_combat_boots.description": "Light Reinforced boots with shock absorbers. They increase fall endurance of the user.",
+
+  "item.arma_futuri.jetpack": "Jetpack Expansion",
+  "item.arma_futuri.jetpack.expansion": "⬤ Jetpack",
+  "item.arma_futuri.jetpack.description": "A compact arrangement of jet engines and a small fuel tank that can be attached to a suitable piece of armor. Allows the user to propel themselves into the air.\n[Jump] while in the air to fly\n[Crouch] to slowly descent",
+
+  "item.arma_futuri.shield_module": "Shield Module (Buggy!)",
+  "item.arma_futuri.shield_module.expansion": "⬤ Shield (Buggy!)",
+  "item.arma_futuri.shield_module.description": "WIP. This should not be used in survival.\nA compact shield generator that can be attached to a suitable piece of armor. protects the user from projectiles and explosions, but offers no protection from melee weapon hits.",
+
+  "item.arma_futuri.flashlight_upgrade": "Flashlight Upgrade",
+  "item.arma_futuri.flashlight_upgrade.expansion": "⬤ Flashlight Upgrade",
+  "item.arma_futuri.flashlight_upgrade.description": "Replaces the built-in flashlight doubling its range.",
+
+  "item.arma_futuri.charge_rifle": "Charge Rifle",
+
+  "item.arma_futuri.charge_marksman_rifle": "Charge Marksman Rifle",
+
+  "item.arma_futuri.expansion.empty": "◯ Empty Expansion  Slot"
+}

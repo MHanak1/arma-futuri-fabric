@@ -1,0 +1,23 @@
+package com.mhanak.arma_futuri.entity.client.armor;
+
+import com.mhanak.arma_futuri.FuturArmsMod;
+import net.minecraft.util.Identifier;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
+
+public class LightCombatArmorModel extends GeoModel {
+    @Override
+    public Identifier getModelResource(GeoAnimatable animatable) {
+        return FuturArmsMod.path("geo/light_combat_armor.geo.json");
+    }
+
+    @Override
+    public Identifier getTextureResource(GeoAnimatable animatable) {
+        return FuturArmsMod.path("textures/models/armor/light_combat_armor.png");
+    }
+
+    @Override
+    public Identifier getAnimationResource(GeoAnimatable animatable) {
+        return FuturArmsMod.path("animations/item/light_combat_armor.animation.json");
+    }
+}

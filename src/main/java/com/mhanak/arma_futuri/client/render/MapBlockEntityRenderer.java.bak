@@ -1,0 +1,104 @@
+package com.mhanak.arma_futuri.client.render;
+
+import com.mhanak.arma_futuri.blockentity.MapBlockEntity;
+import com.mhanak.arma_futuri.registry.ModRenderTypes;
+import com.mojang.blaze3d.systems.RenderSystem;
+//import com.mojang.blaze3d.vertex.*;
+import foundry.veil.api.client.render.VeilRenderSystem;
+import foundry.veil.api.client.render.shader.program.ShaderProgram;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.VertexBuffer;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.util.math.MatrixStack;
+import org.lwjgl.opengl.GL11C;
+import org.lwjgl.opengl.GL32C;
+
+import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.opengl.GL13C.GL_TEXTURE0;
+
+public class MapBlockEntityRenderer implements BlockEntityRenderer<MapBlockEntity> {
+
+    private final VertexBuffer vbo;
+
+    public MapBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+        this.vbo = new VertexBuffer(VertexBuffer.Usage.STATIC);
+        this.vbo.bind();
+        this.vbo.upload(render(20));
+        VertexBuffer.unbind();
+    }
+
+    @Override
+    public void render(MapBlockEntity blockEntity, float partialTicks, MatrixStack poseStack, VertexConsumerProvider source, int light, int overlay) {
+        RenderLayer renderType = ModRenderTypes.heightmap(VeilExampleModEditor.useTessellation());
+
+        renderType.startDrawing();
+        ShaderProgram shader = VeilRenderSystem.getShader();
+        if (shader == null) {
+            renderType.endDrawing();
+            return;
+        }
+
+        MatrixStack modelViewStack = RenderSystem.getModelViewStack();
+        modelViewStack.push();
+        modelViewStack.multiplyPositionMatrix(poseStack.peek().getPositionMatrix());
+//        modelViewStack.scale(25, 20, 25);
+
+        this.vbo.bind();
+        this.vbo.upload(render(20));
+
+        shader.applyRenderSystem();
+        shader.setMatrix("ModelViewMat", modelViewStack.peek().getPositionMatrix());
+        shader.setup();
+        if (VeilExampleModEditor.tessellationWireframe()) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL11C.GL_LINE);
+        }
+        glEnable(GL32C.GL_DEPTH_CLAMP);
+        RenderSystem.activeTexture(GL_TEXTURE0);
+        RenderSystem.bindTexture(MinecraftClient.getInstance().getFramebuffer().getColorAttachment());
+        this.vbo.draw();
+        glDisable(GL32C.GL_DEPTH_CLAMP);
+        if (VeilExampleModEditor.tessellationWireframe()) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+        renderType.endDrawing();
+
+        VertexBuffer.unbind();
+
+        modelViewStack.pop();
+    }
+
+    private static BufferBuilder.BuiltBuffer render(int resolution) {
+        Tessellator tesselator = RenderSystem.renderThreadTesselator();
+        BufferBuilder builder = tesselator.getBuffer();
+        builder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
+
+        for (int z = 0; z <= resolution - 1; z++) {
+            for (int x = 0; x <= resolution - 1; x++) {
+                builder.vertex(x / (float) resolution, 0, z / (float) resolution)
+                        .texture(x / (float) resolution, z / (float) resolution)
+                        .next();
+
+                builder.vertex((x + 1) / (float) resolution, 0, z / (float) resolution)
+                        .texture((x + 1) / (float) resolution, z / (float) resolution)
+                        .next();
+
+                builder.vertex(x / (float) resolution, 0, (z + 1) / (float) resolution)
+                        .texture(x / (float) resolution, (z + 1) / (float) resolution)
+                        .next();
+
+                builder.vertex((x + 1) / (float) resolution, 0, (z + 1) / (float) resolution)
+                        .texture((x + 1) / (float) resolution, (z + 1) / (float) resolution)
+                        .next();
+            }
+        }
+
+        return builder.end();
+    }
+}

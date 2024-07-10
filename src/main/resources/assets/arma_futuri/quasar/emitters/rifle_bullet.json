@@ -1,0 +1,11 @@
+{
+  "max_lifetime": 1,
+  "loop": false,
+  "rate": 1,
+  "count": 1,
+  "emitter_settings": {
+    "shape": "arma_futuri:rifle_bullet",
+    "particle_settings": "arma_futuri:rifle_bullet"
+  },
+  "particle_data": "arma_futuri:rifle_bullet"
+}

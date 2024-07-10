@@ -1,0 +1,10 @@
+package com.mhanak.arma_futuri.util;
+
+import foundry.veil.api.client.render.deferred.light.AreaLight;
+
+public interface LivingEntityAccess {
+    AreaLight getAreaLight();
+    void setAreaLight(AreaLight newAreaLight);
+    boolean getLightEnabled();
+    void setLightEnabled(boolean newLightEnabled);
+}

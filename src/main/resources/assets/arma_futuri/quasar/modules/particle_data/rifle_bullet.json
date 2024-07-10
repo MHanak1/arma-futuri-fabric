@@ -1,0 +1,18 @@
+{
+  "render_style": "CUBE",
+  "init_modules": [
+    "arma_futuri:rifle_bullet_light"
+  ],
+  "update_modules": [
+  ],
+  "collision_modules": [
+  ],
+  "forces": [
+  ],
+  "render_modules": [
+    "arma_futuri:color/rifle_bullet"
+  ],
+  "face_velocity": true,
+  "velocity_stretch_factor": 1.0,
+  "should_collide": false
+}

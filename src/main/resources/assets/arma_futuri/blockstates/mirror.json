@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "arma_futuri:block/mirror",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "arma_futuri:block/mirror",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "arma_futuri:block/mirror"
+    },
+    "facing=west": {
+      "model": "arma_futuri:block/mirror",
+      "y": 90
+    }
+  }
+}
