@@ -6,24 +6,14 @@ import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
 import com.mhanak.arma_futuri.sound.JetpackSoundInstance;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
-import foundry.veil.api.client.render.VeilRenderSystem;
-import foundry.veil.api.client.render.deferred.light.AreaLight;
-import foundry.veil.api.client.render.deferred.light.renderer.LightRenderer;
-import foundry.veil.api.event.VeilRenderLevelStageEvent;
 import foundry.veil.ext.EntityExtension;
-import foundry.veil.fabric.event.FabricVeilRenderLevelStageEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,8 +29,9 @@ public abstract class PlayerEntityMixin {
 
     @Unique
     private float getMaxJetpackVelocity(){
-        if (((PlayerEntity) (Object)this).isSubmergedInWater()) return 0.3f;
-        else return 1f;
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (player.isSubmergedInWater()) return (0.3f / ArmorData.getArmorWheight(player));
+        else return (1f / ArmorData.getArmorWheight(player));
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -54,13 +45,13 @@ public abstract class PlayerEntityMixin {
             if (ArmorData.getJetpackActive((IEntityAccess) this)) {
                 if (player.getVelocity().y < getMaxJetpackVelocity()) {
                     if (player.getVelocity().y < 0) {
-                        player.addVelocity(0, 0.2, 0);
+                        player.addVelocity(0, 0.2 / ArmorData.getArmorWheight(player), 0);
                     } else {
-                        player.addVelocity(0, 0.12, 0);
+                        player.addVelocity(0, 0.12 / ArmorData.getArmorWheight(player), 0);
                     }
                 }
                 player.limitFallDistance();
-                ArmorData.setJetpackFuel((IEntityAccess) this, fuel - 0.5f);
+                ArmorData.setJetpackFuel((IEntityAccess) this, fuel - (0.5f * ArmorData.getArmorWheight(player)));
                 if (player.getWorld().isClient) makeJetpackSound();
             } else if (player.isSneaking()) {
                 double VFall = player.getVelocity().y + 0.12;
@@ -69,10 +60,10 @@ public abstract class PlayerEntityMixin {
                 } else if (VFall > 0) {
                     VFall = 0;
                 }
-                player.addVelocity(0, VFall / -5, 0);
+                player.addVelocity(0, (VFall / -5) / ArmorData.getArmorWheight(player), 0);
                 player.limitFallDistance();
 
-                ArmorData.setJetpackFuel((IEntityAccess) this, fuel - 0.2f);
+                ArmorData.setJetpackFuel((IEntityAccess) this, fuel - (0.2f * ArmorData.getArmorWheight(player)));
                 if (player.getWorld().isClient) makeJetpackSound();
             }else if (player.getWorld().isClient) {
                 stopJetpackSound();
@@ -144,7 +135,7 @@ public abstract class PlayerEntityMixin {
             ArmorData.getJetpackFuel((IEntityAccess) this) > 0
         ){
 
-            cir.setReturnValue(0.1f);
+            cir.setReturnValue(0.1f / ArmorData.getArmorWheight(player));
         }
     }
 }

@@ -17,6 +17,12 @@
       "arma_futuri:charge_marksman_rifle_shot"
     ]
   },
+  "charge_pistol_shot": {
+    "subtitle": "sound.arma_futuri.charge_pistol_shot",
+    "sounds": [
+      "arma_futuri:charge_pistol_shot"
+    ]
+  },
   "notify_reloaded": {
     "subtitle": "sound.arma_futuri.notify_reloaded",
     "sounds": [

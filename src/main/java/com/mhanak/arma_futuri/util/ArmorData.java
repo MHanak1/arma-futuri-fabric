@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.math.MathHelper;
 
 public class ArmorData {
     /*
@@ -33,6 +34,18 @@ public class ArmorData {
         }
     }
      */
+
+    public static float getArmorWheight(PlayerEntity player) {
+        float cummulativeWheight = 0;
+        for (ItemStack stack : player.getInventory().armor){
+            if (stack.getItem() instanceof ArmorItemWithExpansions){
+                cummulativeWheight += ((ArmorItemWithExpansions) stack.getItem()).getArmorWheight();
+            }else if (!stack.isEmpty()){
+                cummulativeWheight += 1;
+            }
+        }
+        return MathHelper.clamp(cummulativeWheight/player.getInventory().armor.size(), 1, 10);
+    }
 
     public static boolean hasWeaponInHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < playerInventory.main.size(); i++) {

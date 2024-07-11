@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Vanishable;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -52,6 +53,7 @@ public abstract class WeaponItem extends Item implements Vanishable {
         super(settings.maxCount(1));
     }
 
+    public abstract boolean isSidearm();
 
     @Override
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
@@ -96,6 +98,14 @@ public abstract class WeaponItem extends Item implements Vanishable {
 
     public boolean canShoot(ItemStack stack, @Nullable Entity holder){
         if (holder != null) {
+            if (holder instanceof PlayerEntity) {
+                if (((PlayerEntity) holder).getInventory().getSlotWithStack(stack) != 0 && !isSidearm()) {
+                    if (holder.getWorld().isClient()) {
+                        MinecraftClient.getInstance().player.sendMessage(Text.of("This weapon must be placed in the 1st slot to be used"));
+                    }
+                    return false;
+                }
+            }
             if (ArmorData.getWeaponEnergy((IEntityAccess) holder) < neededEnergy()) return false;
         }
         return this.getCanFireIn(stack) <= 0;
@@ -169,6 +179,8 @@ public abstract class WeaponItem extends Item implements Vanishable {
     public Identifier getScopeTexture(){
         return ArmaFuturiMod.path("textures/misc/default_scope_overlay.png");
     }
+
+    public abstract Vec3d getInHandOffset();
 
     //for now the server assumes the player is fair and believes every shot. in the future the return will dictate wether the server accepted the shot
     public boolean revieveShotAsServer(PlayerEntity shooter, Entity target, float distance, boolean headshot){

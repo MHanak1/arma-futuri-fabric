@@ -1,19 +1,11 @@
 package com.mhanak.arma_futuri.mixin;
 
-import com.mhanak.arma_futuri.item.WeaponItem;
-import com.mhanak.arma_futuri.util.ArmorData;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(PlayerInventory.class)
 public abstract class PlayerInventoryMixin {
-
+/*
     @Shadow @Final public DefaultedList<ItemStack> main;
 
 
@@ -42,4 +34,6 @@ public abstract class PlayerInventoryMixin {
         }
         return slot;
     }
+
+ */
 }

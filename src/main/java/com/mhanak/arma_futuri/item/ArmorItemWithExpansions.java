@@ -3,10 +3,11 @@ package com.mhanak.arma_futuri.item;
 import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
@@ -18,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ArmorItemWithExpansions extends ArmorItem {
+
+    public abstract int getExpansionSlots(ArmorItem.Type type) ;
+
+    public abstract float getArmorWheight();
+
     public ArmorItemWithExpansions(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }
@@ -65,7 +71,6 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
                     tooltip.add(Text.translatable("item.arma_futuri.expansion.empty").formatted(Formatting.GRAY));
 
                 }
-                //tooltip.add(Text.of("⬤◯ Slot " + i));
             }
         }
         super.appendTooltip(stack, world, tooltip, context);
@@ -75,8 +80,6 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
     public int getExpansionSlots(ItemStack stack){
         return getExpansionSlots(((ArmorItem)stack.getItem()).getType());
     }
-
-    public abstract int getExpansionSlots(ArmorItem.Type type) ;
 
     //public abstract float getDefaultFuel();
 

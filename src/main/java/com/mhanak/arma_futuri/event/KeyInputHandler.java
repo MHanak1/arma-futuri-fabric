@@ -42,7 +42,7 @@ public class KeyInputHandler {
                         if (((WeaponItem) item).canShoot(client.player.getMainHandStack(), client.player)) {
                             ((WeaponItem) item).shootAsShooter(client.world, client.player, client.player.getMainHandStack());
                         }
-                        if (!((WeaponItem)item).isAutomatic()) {
+                        if (!((WeaponItem)item).isAutomatic() || (client.player.getInventory().selectedSlot != 0 && !((WeaponItem) item).isSidearm())) {
                             attackPressed = true;
                         }
                     }
