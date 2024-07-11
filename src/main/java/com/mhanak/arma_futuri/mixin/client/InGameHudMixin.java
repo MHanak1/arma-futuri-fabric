@@ -2,7 +2,7 @@ package com.mhanak.arma_futuri.mixin.client;
 
 import com.mhanak.arma_futuri.ArmaFuturiMod;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
@@ -38,7 +38,7 @@ public class InGameHudMixin {
     @Inject(at= @At("HEAD"), method = "renderCrosshair", cancellable = true)
     private void renderCrosshair(DrawContext context, CallbackInfo ci) {
         if (MinecraftClient.getInstance().player != null){
-            if (MinecraftClient.getInstance().player.getMainHandStack().getItem() instanceof RifleItem){
+            if (MinecraftClient.getInstance().player.getMainHandStack().getItem() instanceof WeaponItem){
                 ci.cancel();
             }
         }
@@ -82,15 +82,15 @@ public class InGameHudMixin {
                 drawJetpackFuel(x - 104 - xoffset, y-3, drawContext);
                 xoffset += 13;
             }
-            if (player.getMainHandStack().getItem() instanceof RifleItem){
+            if (player.getMainHandStack().getItem() instanceof WeaponItem){
                 drawWeaponEnergy(x - 104 - xoffset, y-3, drawContext);
                 xoffset += 13;
             }
             Item item = player.getMainHandStack().getItem();
-            if (item instanceof RifleItem){
-                if (((RifleItem) item).hasScope() && ((IEntityAccess)player).isAiming() && client.options.getPerspective().isFirstPerson()) {
+            if (item instanceof WeaponItem){
+                if (((WeaponItem) item).hasScope() && ((IEntityAccess)player).isAiming() && client.options.getPerspective().isFirstPerson()) {
                     RenderSystem.enableBlend();
-                    renderScopeOverlay(drawContext, 1.0f, ((RifleItem) item).getScopeTexture());
+                    renderScopeOverlay(drawContext, 1.0f, ((WeaponItem) item).getScopeTexture());
                 }
             }
         }

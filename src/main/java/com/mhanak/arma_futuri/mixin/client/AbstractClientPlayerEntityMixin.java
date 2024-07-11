@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.mixin.client;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -15,9 +15,9 @@ public class AbstractClientPlayerEntityMixin {
     private void getFovMultiplier(CallbackInfoReturnable<Float> cir) {
         AbstractClientPlayerEntity player = (AbstractClientPlayerEntity) (Object) this;
         ItemStack stack = player.getMainHandStack();
-        if (stack.getItem() instanceof RifleItem){
+        if (stack.getItem() instanceof WeaponItem){
             if (((IEntityAccess)player).isAiming()){
-                cir.setReturnValue(((RifleItem) stack.getItem()).getFovMultiplier());
+                cir.setReturnValue(((WeaponItem) stack.getItem()).getFovMultiplier());
             }
         }
     }

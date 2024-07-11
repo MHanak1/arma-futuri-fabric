@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.mixin.client;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -18,7 +18,7 @@ public class PlayerEntityRendererMixin {
     private static void getArmPose(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
         ItemStack stack = player.getStackInHand(hand);
         if (hand == Hand.MAIN_HAND) {
-            if (stack.getItem() instanceof RifleItem){
+            if (stack.getItem() instanceof WeaponItem){
                 if (((IEntityAccess)player).isAiming()){
                     cir.setReturnValue(BipedEntityModel.ArmPose.CROSSBOW_HOLD);
                 }else {

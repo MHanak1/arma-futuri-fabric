@@ -43,14 +43,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public abstract class RifleItem  extends Item implements Vanishable {
+public abstract class WeaponItem extends Item implements Vanishable {
 
     public abstract float getProjectileSpeed();
     public abstract float getRange();
 
-    public RifleItem(Settings settings) {
+    public WeaponItem(Settings settings) {
         super(settings.maxCount(1));
     }
+
 
     @Override
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
@@ -135,6 +136,8 @@ public abstract class RifleItem  extends Item implements Vanishable {
 
         super.inventoryTick(stack, world, entity, slot, selected);
     }
+
+
 
     @Environment(EnvType.CLIENT)
     private void playReadyToFireSound(Entity entity){

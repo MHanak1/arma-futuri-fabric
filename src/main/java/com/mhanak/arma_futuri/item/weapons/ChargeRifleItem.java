@@ -1,10 +1,10 @@
 package com.mhanak.arma_futuri.item.weapons;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.registry.ModSounds;
 import net.minecraft.sound.SoundEvent;
 
-public class ChargeRifleItem extends RifleItem {
+public class ChargeRifleItem extends WeaponItem {
     public ChargeRifleItem(Settings settings) {
         super(settings);
     }

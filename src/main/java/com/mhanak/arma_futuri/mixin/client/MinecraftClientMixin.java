@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.mixin.client;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.util.MinecraftClientAccess;
 import foundry.veil.ext.EntityExtension;
 import net.minecraft.client.MinecraftClient;
@@ -42,7 +42,7 @@ public class MinecraftClientMixin implements MinecraftClientAccess {
 
     @Inject(at = @At("HEAD"), method = "handleBlockBreaking", cancellable = true)
     private void handleBlockBreaking(boolean breaking, CallbackInfo ci) {
-        if (((MinecraftClient)(Object)this).player.getMainHandStack().getItem() instanceof RifleItem) {
+        if (((MinecraftClient)(Object)this).player.getMainHandStack().getItem() instanceof WeaponItem) {
             ci.cancel();
         }
     }
@@ -71,7 +71,7 @@ public class MinecraftClientMixin implements MinecraftClientAccess {
     @Inject(at = @At("HEAD"), method = "doAttack", cancellable = true)
     public void doAttack(CallbackInfoReturnable<Boolean> cir) {
         if(MinecraftClient.getInstance().player != null) {
-            if (MinecraftClient.getInstance().player.getMainHandStack().getItem() instanceof RifleItem) {
+            if (MinecraftClient.getInstance().player.getMainHandStack().getItem() instanceof WeaponItem) {
                 //ClientPlayNetworking.send(ModPackets.SHOOT_ID, PacketByteBufs.create());
                 cir.setReturnValue(false);
             }

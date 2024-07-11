@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.event;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -38,11 +38,11 @@ public class KeyInputHandler {
                 }
                 if (client.options.attackKey.isPressed() && !attackPressed){
                     Item item = client.player.getMainHandStack().getItem();
-                    if (item instanceof RifleItem) {
-                        if (((RifleItem) item).canShoot(client.player.getMainHandStack(), client.player)) {
-                            ((RifleItem) item).shootAsShooter(client.world, client.player, client.player.getMainHandStack());
+                    if (item instanceof WeaponItem) {
+                        if (((WeaponItem) item).canShoot(client.player.getMainHandStack(), client.player)) {
+                            ((WeaponItem) item).shootAsShooter(client.world, client.player, client.player.getMainHandStack());
                         }
-                        if (!((RifleItem)item).isAutomatic()) {
+                        if (!((WeaponItem)item).isAutomatic()) {
                             attackPressed = true;
                         }
                     }

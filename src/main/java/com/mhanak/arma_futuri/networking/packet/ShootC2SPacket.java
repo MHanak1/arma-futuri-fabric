@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.networking.packet;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.networking.ModPackets;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -28,8 +28,8 @@ public class ShootC2SPacket {
                     ServerPlayNetworking.send((ServerPlayerEntity) other_player, ModPackets.SHOOT_SYNC_ID, buffer);
                 }
             }
-        }else if (player.getStackInHand(player.getActiveHand()).getItem() instanceof RifleItem && hitEntity != null){
-            ((RifleItem) player.getStackInHand(player.getActiveHand()).getItem()).revieveShotAsServer( player, hitEntity, distance, hitHead);
+        }else if (player.getStackInHand(player.getActiveHand()).getItem() instanceof WeaponItem && hitEntity != null){
+            ((WeaponItem) player.getStackInHand(player.getActiveHand()).getItem()).revieveShotAsServer( player, hitEntity, distance, hitHead);
         }
 
     }

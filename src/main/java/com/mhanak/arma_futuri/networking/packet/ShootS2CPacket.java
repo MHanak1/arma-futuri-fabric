@@ -1,7 +1,7 @@
 package com.mhanak.arma_futuri.networking.packet;
 
 import com.mhanak.arma_futuri.ArmaFuturiMod;
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -16,8 +16,8 @@ public class ShootS2CPacket {
 
                 if (player != null) {
                     if (!player.getMainHandStack().isEmpty()) {
-                        if (player.getMainHandStack().getItem() instanceof RifleItem) {
-                            ((RifleItem) player.getMainHandStack().getItem()).showShootEffects(player);
+                        if (player.getMainHandStack().getItem() instanceof WeaponItem) {
+                            ((WeaponItem) player.getMainHandStack().getItem()).showShootEffects(player);
                         }
                     }
                 }

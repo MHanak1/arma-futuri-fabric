@@ -2,11 +2,13 @@ package com.mhanak.arma_futuri.util;
 
 import com.mhanak.arma_futuri.entity.custom.PersonalShieldEntity;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.networking.ModPackets;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -31,6 +33,15 @@ public class ArmorData {
         }
     }
      */
+
+    public static boolean hasWeaponInHotbar(PlayerInventory playerInventory) {
+        for (int i = 0; i < playerInventory.main.size(); i++) {
+            if (PlayerInventory.isValidHotbarIndex(i)){
+                if (playerInventory.main.get(i).getItem() instanceof WeaponItem) return true;
+            }
+        }
+        return false;
+    }
 
     public static boolean getJetpackActive(IEntityAccess player) {
         NbtCompound nbt = player.arma_futuri$getPersistentData();

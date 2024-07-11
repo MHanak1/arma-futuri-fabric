@@ -4,8 +4,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EntityMixin",
+    "ItemStackMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "SlotMixin"
   ],
   "client": [
     "client.AbstractClientPlayerEntityMixin",

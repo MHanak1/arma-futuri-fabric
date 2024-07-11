@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.mixin.client;
 
-import com.mhanak.arma_futuri.item.RifleItem;
+import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
@@ -19,8 +19,8 @@ public class MouseMixin {
         PlayerEntity player = MinecraftClient.getInstance().player;
         if (player != null) {
             ItemStack stack = player.getMainHandStack();
-            if (stack.getItem() instanceof RifleItem && ((IEntityAccess)player).isAiming()){
-                return value*((RifleItem) stack.getItem()).getFovMultiplier();
+            if (stack.getItem() instanceof WeaponItem && ((IEntityAccess)player).isAiming()){
+                return value*((WeaponItem) stack.getItem()).getFovMultiplier();
             }
         }
         return value;
