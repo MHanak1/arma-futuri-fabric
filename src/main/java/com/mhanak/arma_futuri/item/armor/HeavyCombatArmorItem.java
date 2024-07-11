@@ -19,21 +19,21 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public final class LightCombatArmorItem extends ArmorItemWithExpansions implements GeoItem {
+public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
-    public LightCombatArmorItem(ArmorMaterial armorMaterial, ArmorItem.Type type, Settings properties) {
+    public HeavyCombatArmorItem(ArmorMaterial armorMaterial, ArmorItem.Type type, Settings properties) {
         super(armorMaterial, type, properties);
     }
 
     public int getExpansionSlots(ArmorItem.Type type) {
         switch (type){
             case HELMET -> {
-                return 0;
+                return 1;
             }
             case CHESTPLATE -> {
-                return 1;
+                return 2;
             }
             case LEGGINGS -> {
                 return 0;
@@ -46,7 +46,7 @@ public final class LightCombatArmorItem extends ArmorItemWithExpansions implemen
     }
 
     public float getArmorWheight(){
-        return 1.0f;
+        return 1.2f;
     }
 
     @Override

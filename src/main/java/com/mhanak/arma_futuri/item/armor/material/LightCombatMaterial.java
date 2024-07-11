@@ -1,4 +1,4 @@
-package com.mhanak.arma_futuri.item.armor;
+package com.mhanak.arma_futuri.item.armor.material;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -73,6 +73,6 @@ public class LightCombatMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 0.15f;
+        return 0.1f;
     }
 }

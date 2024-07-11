@@ -19,8 +19,9 @@ public class HeldItemRendererMixin {
     public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
         if (item.getItem() instanceof WeaponItem){
             if (((IEntityAccess)player).isAiming()){
+                WeaponItem weaponItem = (WeaponItem) item.getItem();
                 if (((WeaponItem)item.getItem()).hasScope()) ci.cancel();
-                matrices.translate(-0.375D, 0.17D, 0.2D);
+                matrices.translate(weaponItem.getInHandOffset().x, weaponItem.getInHandOffset().y, weaponItem.getInHandOffset().z);
             }
         }
     }

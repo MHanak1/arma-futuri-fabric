@@ -13,6 +13,7 @@ public class ModSounds {
 
     public static final SoundEvent JETPACK = registerSound("jetpack");
     public static final SoundEvent CHARGE_RIFLE_SHOOT = registerSound("charge_rifle_shot");
+    public static final SoundEvent CHARGE_PISTOL_SHOOT = registerSound("charge_pistol_shot");
     public static final SoundEvent CHARGE_MARKSMAN_RIFLE_SHOOT = registerSound("charge_marksman_rifle_shot");
     public static final SoundEvent NOTIFY_RELOADED = registerSound("notify_reloaded");
 

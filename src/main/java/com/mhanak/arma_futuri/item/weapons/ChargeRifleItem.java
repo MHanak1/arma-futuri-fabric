@@ -3,11 +3,14 @@ package com.mhanak.arma_futuri.item.weapons;
 import com.mhanak.arma_futuri.item.WeaponItem;
 import com.mhanak.arma_futuri.registry.ModSounds;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.Vec3d;
 
 public class ChargeRifleItem extends WeaponItem {
     public ChargeRifleItem(Settings settings) {
         super(settings);
     }
+
+    public boolean isSidearm() {return false;}
 
     public float getSoundRange() {return 2.0f;}
 
@@ -48,5 +51,10 @@ public class ChargeRifleItem extends WeaponItem {
 
     public boolean hasScope(){
         return false;
+    }
+
+    @Override
+    public Vec3d getInHandOffset() {
+        return new Vec3d(-0.375D, 0.17D, 0.2D);
     }
 }
