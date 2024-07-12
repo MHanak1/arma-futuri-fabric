@@ -67,6 +67,25 @@ public class ArmorData {
         return MathHelper.clamp(cummulativeWheight/player.getInventory().armor.size(), 1, 10);
     }
 
+    public static float getOxygenUsageMultiplier(PlayerEntity player) {
+        float mul = 1;
+        for (ItemStack stack : player.getInventory().armor){
+            if (stack.getItem() instanceof ArmorItemWithExpansions){
+                mul *= ((ArmorItemWithExpansions) stack.getItem()).getOxygenUsageMultiplier(stack);
+            }
+        }
+        return mul;
+    }
+    public static float getFallDamageMultiplier(PlayerEntity player) {
+        float mul = 1;
+        for (ItemStack stack : player.getInventory().armor){
+            if (stack.getItem() instanceof ArmorItemWithExpansions){
+                mul *= ((ArmorItemWithExpansions) stack.getItem()).getFallDamageMultiplier(stack);
+            }
+        }
+        return mul;
+    }
+
     public static boolean hasWeaponInHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < playerInventory.main.size(); i++) {
             if (PlayerInventory.isValidHotbarIndex(i)){

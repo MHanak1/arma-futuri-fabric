@@ -35,9 +35,15 @@ public abstract class ExpansionItem extends Item {
 
     public float addsWheight() {return 0;}
 
+    public float fallDamageMultiplier() {return 1;}
+
+    public float oxygenUsageMultiplier() {return 1;}
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(getTranslationKey() + ".description").formatted(Formatting.GRAY));
+        if (addsFuel() != 0) tooltip.add(Text.translatable("text.arma_futuri.adds_fuel", addsFuel()).formatted(Formatting.GRAY));
+        if (addsProtection() != 0) tooltip.add(Text.translatable("text.arma_futuri.adds_damage_absorbtion", addsProtection()).formatted(Formatting.GRAY));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

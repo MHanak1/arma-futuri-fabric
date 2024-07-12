@@ -1,10 +1,7 @@
 package com.mhanak.arma_futuri;
 
 import com.mhanak.arma_futuri.networking.ModPackets;
-import com.mhanak.arma_futuri.registry.ModBlocks;
-import com.mhanak.arma_futuri.registry.ModEntities;
-import com.mhanak.arma_futuri.registry.ModItems;
-import com.mhanak.arma_futuri.registry.ModSounds;
+import com.mhanak.arma_futuri.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
@@ -36,7 +33,7 @@ public class ArmaFuturiMod implements ModInitializer {
         ModEntities.bootstrap();
         ModPackets.registerS2CPackets();
         ModSounds.registerSounds();
-        Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder().displayName(Text.translatable(MODID + ".items")).icon(() -> new ItemStack(ModBlocks.MIRROR)).entries(ModItems::fillTab).build());
+        Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder().displayName(Text.translatable(MODID + ".items")).icon(() -> new ItemStack(ExpansionItems.JETPACK)).entries(ModItems::fillTab).build());
 
 
     }

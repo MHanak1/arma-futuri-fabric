@@ -16,6 +16,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -37,9 +38,6 @@ public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implemen
             }
             case LEGGINGS -> {
                 return 1;
-            }
-            case BOOTS -> {
-                return 0;
             }
         }
         return 0;
@@ -83,6 +81,32 @@ public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implemen
             }
         }
         return 0;
+    }
+
+    @Override
+    public float oxygenUsageMultiplier(Type type) {
+        if (Objects.requireNonNull(type) == Type.HELMET) {
+            return 0.25f;
+        }
+        return 1;
+    }
+
+    @Override
+    public float fallDamageMultiplier(Type type) {
+        switch (type){
+            case LEGGINGS -> {
+                return 0.8f;
+            }
+            case BOOTS -> {
+                return 0.7f;
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public boolean isSealed() {
+        return true;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mhanak.arma_futuri.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import com.mhanak.arma_futuri.item.ExpansionItem;
 import com.mhanak.arma_futuri.registry.ExpansionItems;
@@ -15,7 +16,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,6 +39,21 @@ public abstract class PlayerEntityMixin {
     float modifyDamage(DamageSource source, float amount) {
         if (source.isIn(DamageTypeTags.BYPASSES_ARMOR) || source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) return amount;
         return MathHelper.clamp(amount-ArmorData.getTotalDamageAbsorbtion((PlayerEntity) (Object)this), 0, 100000);
+    }
+
+    @ModifyReturnValue(method = "getBlockBreakingSpeed", at = @At(value = "RETURN"))
+    float modifyBlockBreakingSpeed(float speed) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (player.isSubmergedIn(FluidTags.WATER)) {
+            for (ItemStack stack : player.getArmorItems()){
+                if (stack.getItem() instanceof ArmorItemWithExpansions && ((ArmorItem) stack.getItem()).getType() == ArmorItem.Type.CHESTPLATE ){
+                    if (((ArmorItemWithExpansions) stack.getItem()).isSealed()){
+                        return speed*5;
+                    }
+                }
+            }
+        }
+        return speed;
     }
 
     @Unique

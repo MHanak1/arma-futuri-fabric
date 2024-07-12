@@ -28,11 +28,15 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
 
     public abstract float getDefaultProtection(ArmorItem.Type type);
 
+    public abstract float oxygenUsageMultiplier(ArmorItem.Type type);
+
+    public abstract float fallDamageMultiplier(ArmorItem.Type type);
+
+    public abstract boolean isSealed();
+
     public ArmorItemWithExpansions(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }
-
-
 
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player) {
@@ -88,8 +92,6 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
         return getExpansionSlots(((ArmorItem)stack.getItem()).getType());
     }
 
-    //public abstract float getDefaultFuel();
-
     public float getArmorWeight(ItemStack stack) {
         float weight = getDefaultArmorWeight(((ArmorItem)stack.getItem()).getType());
         for (ExpansionItem expansion : getExpansions(stack)) {
@@ -121,6 +123,24 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
             armor += expansion.addsProtection();
         }
         return armor;
+    }
+
+    public float getOxygenUsageMultiplier(ItemStack stack) {
+        //float fuel = getDefaultFuel();
+        float mul = oxygenUsageMultiplier(((ArmorItem)stack.getItem()).getType());
+        for (ExpansionItem expansion : getExpansions(stack)) {
+            mul *= expansion.oxygenUsageMultiplier();
+        }
+        return mul;
+    }
+
+    public float getFallDamageMultiplier(ItemStack stack) {
+        //float fuel = getDefaultFuel();
+        float mul = fallDamageMultiplier(((ArmorItem)stack.getItem()).getType());
+        for (ExpansionItem expansion : getExpansions(stack)) {
+            mul *= expansion.fallDamageMultiplier();
+        }
+        return mul;
     }
 
     public static List<ExpansionItem> getExpansions(ItemStack stack) {

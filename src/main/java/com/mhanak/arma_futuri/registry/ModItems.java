@@ -5,20 +5,22 @@ import com.mhanak.arma_futuri.item.armor.HeavyCombatArmorItem;
 import com.mhanak.arma_futuri.item.armor.LightCombatArmorItem;
 import com.mhanak.arma_futuri.item.armor.material.HeavyCombatMaterial;
 import com.mhanak.arma_futuri.item.armor.material.LightCombatMaterial;
+import com.mhanak.arma_futuri.item.weapons.ChargeMarksmanRifleItem;
 import com.mhanak.arma_futuri.item.weapons.ChargePistolItem;
 import com.mhanak.arma_futuri.item.weapons.ChargeRifleItem;
-import com.mhanak.arma_futuri.item.weapons.ChargeMarksmanRifleItem;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModItems {
 
-    public static final Set<Item> ITEMS = new HashSet<>();
+    public static List<Item> ITEMS = new ArrayList<>();
 
     public static final ArmorMaterial LIGHT_COMBAT_ARMOR_MATERIAL = new LightCombatMaterial();
     public static final ArmorMaterial HEAVY_COMBAT_ARMOR_MATERIAL = new HeavyCombatMaterial();
@@ -39,6 +41,13 @@ public class ModItems {
 
     public static void bootstrap() {
 
+        ExpansionItems.register("jetpack", ExpansionItems.JETPACK);
+        ExpansionItems.register("shield_module", ExpansionItems.SHIELD_MODULE);
+        ExpansionItems.register("flashlight_upgrade", ExpansionItems.FLASHLIGHT_UPGRADE);
+        ExpansionItems.register("armor_reinforcement", ExpansionItems.ARMOR_REINFORCEMENT_UPGRADE);
+        ExpansionItems.register("hydraulics_upgrade", ExpansionItems.HYDRAULICS_UPGRADE);
+        ExpansionItems.register("oxygen_recycler", ExpansionItems.OXYGEN_RECYCLER_UPGRADE);
+        ExpansionItems.register("shock_absorber", ExpansionItems.SHOCK_ABSORBER_UPGRADE);
 
         register("light_combat_helmet", LIGHT_COMBAT_HELMET);
         register("light_combat_chestplate", LIGHT_COMBAT_CHESTPLATE);
@@ -54,11 +63,6 @@ public class ModItems {
         register("charge_marksman_rifle", CHARGE_MARKSMAN_RIFLE);
         register("charge_pistol", CHARGE_PISTOL);
 
-        ExpansionItems.register("jetpack", ExpansionItems.JETPACK);
-        ExpansionItems.register("shield_module", ExpansionItems.SHIELD_MODULE);
-        ExpansionItems.register("flashlight_upgrade", ExpansionItems.FLASHLIGHT_UPGRADE);
-        ExpansionItems.register("armor_reinforcement", ExpansionItems.ARMOR_REINFORCEMENT_UPGRADE);
-        ExpansionItems.register("hydraulics_upgrade", ExpansionItems.HYDRAULICS_UPGRADE);
 
     }
 
@@ -69,6 +73,9 @@ public class ModItems {
     }
 
     public static void fillTab(ItemGroup.DisplayContext context, ItemGroup.Entries output) {
-        ITEMS.stream().sorted(Comparator.comparing(Registries.ITEM::getId)).forEach(item -> output.add(new ItemStack(item)));
+        //ITEMS.stream().sorted(Comparator.comparing(Registries.ITEM::getId)).forEach(item -> output.add(new ItemStack(item)));
+        for (Item item : ITEMS){
+            output.add(item);
+        }
     }
 }

@@ -22,6 +22,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.Vec3d;
@@ -32,6 +33,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -44,6 +46,10 @@ public abstract class LivingEntityMixin implements ILivingEntityAccess {
     @Shadow public abstract boolean isAlive();
 
     @Shadow public abstract boolean hasNoDrag();
+
+    @Shadow protected abstract int getNextAirOnLand(int air);
+
+    @Shadow public abstract void remove(Entity.RemovalReason reason);
 
     private static TrackedData<OptionalInt> attachedEntity;
     private static TrackedData<OptionalInt> attachmentEntity;
@@ -162,6 +168,34 @@ public abstract class LivingEntityMixin implements ILivingEntityAccess {
             ((IEntityAccess) entity).arma_futuri$setAreaLight(null);
         }
         //ArmaFuturiMod.LOGGER.info("Light removed");
+    }
+
+    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
+    private float damageMultiplier(float multiplier) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (entity instanceof PlayerEntity) {
+            return multiplier * (ArmorData.getFallDamageMultiplier((PlayerEntity) entity));
+        }
+        return multiplier;
+    }
+
+    @Inject(method = "getNextAirUnderwater", at = @At("HEAD"), cancellable = true)
+    private void getNextAirUnderwater(int air, CallbackInfoReturnable<Integer> cir) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        for (ItemStack stack : entity.getArmorItems()){
+            if (stack.getItem() instanceof ArmorItemWithExpansions && entity instanceof PlayerEntity){
+                if (((ArmorItemWithExpansions) stack.getItem()).getType() == ArmorItem.Type.HELMET){
+                    if (ArmorItemWithExpansions.hasExpansion(entity, ExpansionItems.OXYGEN_RECYCLER_UPGRADE)){
+                        cir.setReturnValue(getNextAirOnLand(air));
+                        return;
+                    }
+                    float rand = entity.getRandom().nextFloat();
+                    if (rand > ArmorData.getOxygenUsageMultiplier((PlayerEntity) entity)){
+                        cir.setReturnValue(air);
+                    }
+                }
+            }
+        }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))

@@ -13,7 +13,10 @@ public class ExpansionItems {
     public static final ExpansionItem FLASHLIGHT_UPGRADE = new FlashlightUpgrade(new Item.Settings());
     public static final ExpansionItem ARMOR_REINFORCEMENT_UPGRADE = new ArmorReinforcementUpgrade(new Item.Settings());
     public static final ExpansionItem HYDRAULICS_UPGRADE = new HydraulicsUpgrade(new Item.Settings());
-    private static List<ExpansionItem> expansionItems = new ArrayList<>();
+    public static final ExpansionItem OXYGEN_RECYCLER_UPGRADE = new OxygenRecyclerUpgrade(new Item.Settings());
+    public static final ExpansionItem SHOCK_ABSORBER_UPGRADE = new ShockAbsorberUpgrade(new Item.Settings());
+
+    private static final List<ExpansionItem> expansionItems = new ArrayList<>();
 
     public static ExpansionItem get(int Id) {
         return expansionItems.get(Id);

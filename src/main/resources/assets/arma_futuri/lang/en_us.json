@@ -5,7 +5,6 @@
   "key.arma_futuri.toggle_flashlight": "Toggle Flashlight",
   "key.arma_futuri.toggle_shield": "Toggle Shield",
 
-  "text.arma_futur.damage_absorbtion": "+%s Damage Absorbtion",
 
   "death.attack.rifle": "%s was shot by %s",
 
@@ -32,6 +31,11 @@
   "item.arma_futuri.heavy_combat_boots": "Heavy Combat Boots",
   "item.arma_futuri.heavy_combat_boots.description": "Heavily reinforced boots with shock absorbers, which also help the user move slightly faster. They increase fall endurance of the user.",
 
+  "text.arma_futur.damage_absorbtion": "%s Damage Absorption",
+
+  "text.arma_futuri.adds_damage_absorbtion": "+%d Damage Absorption",
+  "text.arma_futuri.adds_fuel": "+%d Fuel Capacity",
+
   "item.arma_futuri.jetpack": "Jetpack Expansion",
   "item.arma_futuri.jetpack.expansion": "⬤ Jetpack",
   "item.arma_futuri.jetpack.description": "A compact arrangement of jet engines and a small fuel tank that can be attached to a suitable piece of armor. Allows the user to propel themselves into the air.\nPerformance varies with carried weight.\n[Jump] while in the air to fly\n[Crouch] to slowly descent",
@@ -44,13 +48,22 @@
   "item.arma_futuri.flashlight_upgrade.expansion": "⬤ Flashlight Upgrade",
   "item.arma_futuri.flashlight_upgrade.description": "Replaces the built-in flashlight doubling its range.",
 
+  "item.arma_futuri.oxygen_recycler": "Oxygen Recycler",
+  "item.arma_futuri.oxygen_recycler.expansion": "⬤ Oxygen Recycler",
+  "item.arma_futuri.oxygen_recycler.description": "Recycles oxygen within the helmet allowing full independence from an external oxygen supply",
+
   "item.arma_futuri.armor_reinforcement": "Armor Reinforcement",
   "item.arma_futuri.armor_reinforcement.expansion": "⬤ Reinforced",
-  "item.arma_futuri.armor_reinforcement.description": "Reinforces the armor at the slight expense of movement speed\n+1 Damage Absorption",
+  "item.arma_futuri.armor_reinforcement.description": "Reinforces the armor at the slight expense of movement speed",
 
   "item.arma_futuri.hydraulics_upgrade": "Hydraulics Upgrade",
   "item.arma_futuri.hydraulics_upgrade.expansion": "⬤ Upgraded Hydraulics",
   "item.arma_futuri.hydraulics_upgrade.description": "Improves the built in hydraulics to improve mobility.",
+
+  "item.arma_futuri.shock_absorber": "Shock Absorber",
+  "item.arma_futuri.shock_absorber.expansion": "⬤ Shock Absorber",
+  "item.arma_futuri.shock_absorber.description": "Vastly decreases fall damage experienced by its user",
+
 
   "item.arma_futuri.charge_rifle": "Charge Rifle",
   "item.arma_futuri.charge_rifle.description": "A standard issue assault rifle. shoots plasma charged bullets over short to medium distances.\nRange: 80 blocks. High damage Falloff\nNeeds to be in the 1st slot to fire.",
