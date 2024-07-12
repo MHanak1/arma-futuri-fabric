@@ -1,9 +1,11 @@
 {
   "arma_futuri.items": "Arma Futuri",
-  "key.category.arma_futuri.arma_futuri": "arma_futuri",
+  "key.category.arma_futuri.arma_futuri": "Arma Futuri",
 
   "key.arma_futuri.toggle_flashlight": "Toggle Flashlight",
   "key.arma_futuri.toggle_shield": "Toggle Shield",
+
+  "text.arma_futur.damage_absorbtion": "+%s Damage Absorbtion",
 
   "death.attack.rifle": "%s was shot by %s",
 
@@ -14,19 +16,25 @@
 
   "item.arma_futuri.light_combat_helmet": "Light Combat Helmet",
   "item.arma_futuri.light_combat_helmet.description": "A light yet durable helmet made using titanium based armor plates. Offers basic protection from blunt and sharp objects\nHas a built-in flashlight.",
-
   "item.arma_futuri.light_combat_chestplate": "Light Combat Chestplate",
   "item.arma_futuri.light_combat_chestplate.description": "A light chestplate used by recon troops, made using titanium based armor plates. Has one expansion slot.",
-
   "item.arma_futuri.light_combat_leggings": "Light Combat Leggings",
   "item.arma_futuri.light_combat_leggings.description": "Lightly armored leggings with basic hydraulics allowing for slightly faster walking speed.",
-
   "item.arma_futuri.light_combat_boots": "Light Combat Boots",
   "item.arma_futuri.light_combat_boots.description": "Light Reinforced boots with shock absorbers. They increase fall endurance of the user.",
 
+  "item.arma_futuri.heavy_combat_helmet": "Heavy Combat Helmet",
+  "item.arma_futuri.heavy_combat_helmet.description": "A heavily armored helmet. Sealed allowing the user to survive longer under water or in vacuum.\nHas a built-in flashlight and one expansion slot.",
+  "item.arma_futuri.heavy_combat_chestplate": "Heavy Combat Chestplate",
+  "item.arma_futuri.heavy_combat_chestplate.description": "A heavily armored chestplate. Due to its heft it slows down the user. Has two expansion slots.",
+  "item.arma_futuri.heavy_combat_leggings": "Heavy Combat Leggings",
+  "item.arma_futuri.heavy_combat_leggings.description": "Heavily armored leggings with advanced hydraulics used to compensate for the added heft of other pieces of armor. Has one expansion slot.",
+  "item.arma_futuri.heavy_combat_boots": "Heavy Combat Boots",
+  "item.arma_futuri.heavy_combat_boots.description": "Heavily reinforced boots with shock absorbers, which also help the user move slightly faster. They increase fall endurance of the user.",
+
   "item.arma_futuri.jetpack": "Jetpack Expansion",
   "item.arma_futuri.jetpack.expansion": "⬤ Jetpack",
-  "item.arma_futuri.jetpack.description": "A compact arrangement of jet engines and a small fuel tank that can be attached to a suitable piece of armor. Allows the user to propel themselves into the air.\n[Jump] while in the air to fly\n[Crouch] to slowly descent",
+  "item.arma_futuri.jetpack.description": "A compact arrangement of jet engines and a small fuel tank that can be attached to a suitable piece of armor. Allows the user to propel themselves into the air.\nPerformance varies with carried weight.\n[Jump] while in the air to fly\n[Crouch] to slowly descent",
 
   "item.arma_futuri.shield_module": "Shield Module (Buggy!)",
   "item.arma_futuri.shield_module.expansion": "⬤ Shield (Buggy!)",
@@ -36,9 +44,22 @@
   "item.arma_futuri.flashlight_upgrade.expansion": "⬤ Flashlight Upgrade",
   "item.arma_futuri.flashlight_upgrade.description": "Replaces the built-in flashlight doubling its range.",
 
+  "item.arma_futuri.armor_reinforcement": "Armor Reinforcement",
+  "item.arma_futuri.armor_reinforcement.expansion": "⬤ Reinforced",
+  "item.arma_futuri.armor_reinforcement.description": "Reinforces the armor at the slight expense of movement speed\n+1 Damage Absorption",
+
+  "item.arma_futuri.hydraulics_upgrade": "Hydraulics Upgrade",
+  "item.arma_futuri.hydraulics_upgrade.expansion": "⬤ Upgraded Hydraulics",
+  "item.arma_futuri.hydraulics_upgrade.description": "Improves the built in hydraulics to improve mobility.",
+
   "item.arma_futuri.charge_rifle": "Charge Rifle",
+  "item.arma_futuri.charge_rifle.description": "A standard issue assault rifle. shoots plasma charged bullets over short to medium distances.\nRange: 80 blocks. High damage Falloff\nNeeds to be in the 1st slot to fire.",
 
   "item.arma_futuri.charge_marksman_rifle": "Charge Marksman Rifle",
+  "item.arma_futuri.charge_marksman_rifle.description": "A modified charge rifle with a scope and an upgraded barrel. shoots plasma charged bullets over long distances.\nRange: 200 blocks. Low damage Falloff\nNeeds to be in the 1st slot to fire.",
+
+  "item.arma_futuri.charge_pistol": "Charge Pistol",
+  "item.arma_futuri.charge_pistol.description": "A standard issue sidearm. shoots plasma charged bullets over short distances.\nRange: 50 blocks. High damage Falloff",
 
   "item.arma_futuri.expansion.empty": "◯ Empty Expansion  Slot"
 }

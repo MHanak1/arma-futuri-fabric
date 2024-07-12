@@ -77,6 +77,6 @@ public class ChargePistolItem extends WeaponItem {
 
     @Override
     public Vec3d getInHandOffset() {
-        return new Vec3d(-0.375D, 0.17D, -0.1D);
+        return new Vec3d(-0.375D, 0.17D, -0.05D);
     }
 }

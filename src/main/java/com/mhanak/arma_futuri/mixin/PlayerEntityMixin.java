@@ -2,7 +2,7 @@ package com.mhanak.arma_futuri.mixin;
 
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import com.mhanak.arma_futuri.item.ExpansionItem;
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import com.mhanak.arma_futuri.sound.JetpackSoundInstance;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
@@ -12,12 +12,16 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -27,11 +31,23 @@ public abstract class PlayerEntityMixin {
     @Environment(EnvType.CLIENT)
     private SoundInstance jetpackSound;
 
+    @ModifyArg(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"), index = 1)
+    float modifyDamage(DamageSource source, float amount) {
+        if (source.isIn(DamageTypeTags.BYPASSES_ARMOR) || source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) return amount;
+        return MathHelper.clamp(amount-ArmorData.getTotalDamageAbsorbtion((PlayerEntity) (Object)this), 0, 100000);
+    }
+
     @Unique
     private float getMaxJetpackVelocity(){
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (player.isSubmergedInWater()) return (0.3f / ArmorData.getArmorWheight(player));
         else return (1f / ArmorData.getArmorWheight(player));
+    }
+
+    @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
+    private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
+        cir.setReturnValue ( (float) ((PlayerEntity)(Object)this).getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * ArmorData.getTotalSpeedModifier((PlayerEntity)(Object)this));
+
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

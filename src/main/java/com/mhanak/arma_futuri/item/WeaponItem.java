@@ -18,6 +18,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
@@ -28,6 +29,7 @@ import net.minecraft.item.Vanishable;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -181,6 +183,12 @@ public abstract class WeaponItem extends Item implements Vanishable {
     }
 
     public abstract Vec3d getInHandOffset();
+
+
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable(getTranslationKey() + ".description").formatted(Formatting.GRAY));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 
     //for now the server assumes the player is fair and believes every shot. in the future the return will dictate wether the server accepted the shot
     public boolean revieveShotAsServer(PlayerEntity shooter, Entity target, float distance, boolean headshot){

@@ -5,7 +5,6 @@ import com.mhanak.arma_futuri.item.armor.HeavyCombatArmorItem;
 import com.mhanak.arma_futuri.item.armor.LightCombatArmorItem;
 import com.mhanak.arma_futuri.item.armor.material.HeavyCombatMaterial;
 import com.mhanak.arma_futuri.item.armor.material.LightCombatMaterial;
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
 import com.mhanak.arma_futuri.item.weapons.ChargePistolItem;
 import com.mhanak.arma_futuri.item.weapons.ChargeRifleItem;
 import com.mhanak.arma_futuri.item.weapons.ChargeMarksmanRifleItem;
@@ -58,6 +57,8 @@ public class ModItems {
         ExpansionItems.register("jetpack", ExpansionItems.JETPACK);
         ExpansionItems.register("shield_module", ExpansionItems.SHIELD_MODULE);
         ExpansionItems.register("flashlight_upgrade", ExpansionItems.FLASHLIGHT_UPGRADE);
+        ExpansionItems.register("armor_reinforcement", ExpansionItems.ARMOR_REINFORCEMENT_UPGRADE);
+        ExpansionItems.register("hydraulics_upgrade", ExpansionItems.HYDRAULICS_UPGRADE);
 
     }
 

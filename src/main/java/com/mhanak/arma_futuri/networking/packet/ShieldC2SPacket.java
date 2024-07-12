@@ -4,7 +4,7 @@ import com.mhanak.arma_futuri.ArmaFuturiMod;
 import com.mhanak.arma_futuri.entity.custom.PersonalShieldEntity;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import com.mhanak.arma_futuri.item.ExpansionItem;
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import com.mhanak.arma_futuri.networking.ModPackets;
 import com.mhanak.arma_futuri.registry.ModEntities;
 import com.mhanak.arma_futuri.util.ArmorData;

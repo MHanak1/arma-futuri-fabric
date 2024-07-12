@@ -3,7 +3,7 @@ package com.mhanak.arma_futuri.mixin.client;
 import com.mhanak.arma_futuri.ArmaFuturiMod;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import com.mhanak.arma_futuri.item.WeaponItem;
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import com.mojang.blaze3d.systems.RenderSystem;

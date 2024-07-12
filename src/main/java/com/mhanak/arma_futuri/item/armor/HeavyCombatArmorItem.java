@@ -36,7 +36,7 @@ public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implemen
                 return 2;
             }
             case LEGGINGS -> {
-                return 0;
+                return 1;
             }
             case BOOTS -> {
                 return 0;
@@ -45,8 +45,44 @@ public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implemen
         return 0;
     }
 
-    public float getArmorWheight(){
+    public float getDefaultArmorWeight(ArmorItem.Type type){
         return 1.2f;
+    }
+
+    public float getDefaultSpeedModifier(ArmorItem.Type type) {
+        switch (type){
+            case HELMET -> {
+                return 0.8f;
+            }
+            case CHESTPLATE -> {
+                return 0.6f;
+            }
+            case LEGGINGS -> {
+                return 1.7f;
+            }
+            case BOOTS -> {
+                return 1.3f;
+            }
+        }
+        return 0;
+    }
+
+    public float getDefaultProtection(ArmorItem.Type type) {
+        switch (type){
+            case HELMET -> {
+                return 0.6f;
+            }
+            case CHESTPLATE -> {
+                return 1.6f;
+            }
+            case LEGGINGS -> {
+                return 1.4f;
+            }
+            case BOOTS -> {
+                return 0.8f;
+            }
+        }
+        return 0;
     }
 
     @Override

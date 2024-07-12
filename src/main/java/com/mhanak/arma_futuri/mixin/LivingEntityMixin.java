@@ -3,7 +3,7 @@ package com.mhanak.arma_futuri.mixin;
 import com.mhanak.arma_futuri.entity.custom.PersonalShieldEntity;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import com.mhanak.arma_futuri.item.ExpansionItem;
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import com.mhanak.arma_futuri.util.ArmorData;
 import com.mhanak.arma_futuri.util.IEntityAccess;
 import com.mhanak.arma_futuri.util.ILivingEntityAccess;
