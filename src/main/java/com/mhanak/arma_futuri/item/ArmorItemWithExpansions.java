@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.item;
 
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,13 +20,19 @@ import java.util.List;
 
 public abstract class ArmorItemWithExpansions extends ArmorItem {
 
-    public abstract int getExpansionSlots(ArmorItem.Type type) ;
+    public abstract int getExpansionSlots(ArmorItem.Type type);
 
-    public abstract float getArmorWheight();
+    public abstract float getDefaultArmorWeight(ArmorItem.Type type);
+
+    public abstract float getDefaultSpeedModifier(ArmorItem.Type type);
+
+    public abstract float getDefaultProtection(ArmorItem.Type type);
 
     public ArmorItemWithExpansions(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }
+
+
 
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player) {
@@ -59,6 +65,7 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable(getTranslationKey()+".description").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("text.arma_futur.damage_absorbtion", String.valueOf(getDamageAbsorbtion(stack))).formatted(Formatting.GRAY));
         if (getExpansionSlots(stack) > 0){
             tooltip.add(Text.of(""));
             tooltip.add(Text.of("Expansions:"));
@@ -83,13 +90,37 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
 
     //public abstract float getDefaultFuel();
 
+    public float getArmorWeight(ItemStack stack) {
+        float weight = getDefaultArmorWeight(((ArmorItem)stack.getItem()).getType());
+        for (ExpansionItem expansion : getExpansions(stack)) {
+            weight += expansion.addsWheight();
+        }
+        return weight;
+    }
+
     public float getMaxFuel(ItemStack stack){
-        //float fuel = getDefaultFuel();
         float fuel = 0;
-        for (ExpansionItem expansion : this.getExpansions(stack)) {
+        for (ExpansionItem expansion : getExpansions(stack)) {
             fuel += expansion.addsFuel();
         }
         return fuel;
+    }
+
+    public float getSpeedModifier(ItemStack stack){
+        float speed = getDefaultSpeedModifier(((ArmorItem)stack.getItem()).getType());
+        for (ExpansionItem expansion : getExpansions(stack)) {
+            speed += expansion.speedModifier();
+        }
+        return speed;
+    }
+
+    public float getDamageAbsorbtion(ItemStack stack) {
+        //float fuel = getDefaultFuel();
+        float armor = getDefaultProtection(((ArmorItem)stack.getItem()).getType());
+        for (ExpansionItem expansion : getExpansions(stack)) {
+            armor += expansion.addsProtection();
+        }
+        return armor;
     }
 
     public static List<ExpansionItem> getExpansions(ItemStack stack) {

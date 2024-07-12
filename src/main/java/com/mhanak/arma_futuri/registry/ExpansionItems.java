@@ -1,7 +1,7 @@
-package com.mhanak.arma_futuri.item.expansion;
+package com.mhanak.arma_futuri.registry;
 
 import com.mhanak.arma_futuri.item.ExpansionItem;
-import com.mhanak.arma_futuri.registry.ModItems;
+import com.mhanak.arma_futuri.item.expansion.*;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -11,11 +11,14 @@ public class ExpansionItems {
     public static final ExpansionItem JETPACK = new JetpackItem(new Item.Settings());
     public static final ExpansionItem SHIELD_MODULE = new ShieldModuleItem(new Item.Settings());
     public static final ExpansionItem FLASHLIGHT_UPGRADE = new FlashlightUpgrade(new Item.Settings());
+    public static final ExpansionItem ARMOR_REINFORCEMENT_UPGRADE = new ArmorReinforcementUpgrade(new Item.Settings());
+    public static final ExpansionItem HYDRAULICS_UPGRADE = new HydraulicsUpgrade(new Item.Settings());
     private static List<ExpansionItem> expansionItems = new ArrayList<>();
 
     public static ExpansionItem get(int Id) {
         return expansionItems.get(Id);
     }
+
 
     //REGISTRATION ORDER SHALL REMAIN UNCHANGED, the ids are assigned incrementally, so if you change the order, the ids will change
     public static void register(String name, ExpansionItem expansionItem) {
@@ -29,7 +32,6 @@ public class ExpansionItems {
                 return i;
             }
         }
-
         return -1;
     }
 }

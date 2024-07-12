@@ -8,8 +8,8 @@ public class FlashlightUpgrade extends ExpansionItem {
         super(settings);
     }
 
-    @Override
-    public EquipmentSlot getEquipableOn() {
-        return EquipmentSlot.HEAD;
+    public boolean canBeEquippedOn(EquipmentSlot slot) {
+        return slot == EquipmentSlot.CHEST;
     }
+
 }

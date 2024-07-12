@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.item;
 
-import com.mhanak.arma_futuri.item.expansion.ExpansionItems;
+import com.mhanak.arma_futuri.registry.ExpansionItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -21,15 +21,19 @@ public abstract class ExpansionItem extends Item {
         return ExpansionItems.getExtensionId(this);
     }
 
-    abstract public EquipmentSlot getEquipableOn();
+    //abstract public EquipmentSlot getEquipableOn();
 
-    public boolean canBeEquippedOn(EquipmentSlot slot) {
-        return slot == getEquipableOn();
-    }
+    public abstract boolean canBeEquippedOn(EquipmentSlot slot);
 
     public float addsFuel() {
         return 0;
     }
+
+    public float addsProtection(){return 0;}
+
+    public float speedModifier(){return 0;}
+
+    public float addsWheight() {return 0;}
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

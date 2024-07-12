@@ -45,8 +45,44 @@ public final class LightCombatArmorItem extends ArmorItemWithExpansions implemen
         return 0;
     }
 
-    public float getArmorWheight(){
+    public float getDefaultArmorWeight(ArmorItem.Type type){
         return 1.0f;
+    }
+
+    public float getDefaultSpeedModifier(ArmorItem.Type type) {
+        switch (type){
+            case HELMET -> {
+                return 0.95f;
+            }
+            case CHESTPLATE -> {
+                return 0.8f;
+            }
+            case LEGGINGS -> {
+                return 1.5f;
+            }
+            case BOOTS -> {
+                return 1.2f;
+            }
+        }
+        return 0;
+    }
+
+    public float getDefaultProtection(ArmorItem.Type type) {
+        switch (type){
+            case HELMET -> {
+                return 0.3f;
+            }
+            case CHESTPLATE -> {
+                return 0.8f;
+            }
+            case LEGGINGS -> {
+                return 0.7f;
+            }
+            case BOOTS -> {
+                return 0.4f;
+            }
+        }
+        return 0;
     }
 
     @Override

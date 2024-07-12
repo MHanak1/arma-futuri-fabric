@@ -9,9 +9,8 @@ public class JetpackItem extends ExpansionItem {
         super(settings);
     }
 
-    @Override
-    public EquipmentSlot getEquipableOn() {
-        return EquipmentSlot.CHEST;
+    public boolean canBeEquippedOn(EquipmentSlot slot) {
+        return slot == EquipmentSlot.CHEST;
     }
 
     @Override

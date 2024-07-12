@@ -35,11 +35,31 @@ public class ArmorData {
     }
      */
 
+    public static float getTotalSpeedModifier(PlayerEntity player) {
+        float speed = 1;
+        for (ItemStack armorPiece : player.getInventory().armor){
+            if (armorPiece.getItem() instanceof ArmorItemWithExpansions){
+                speed *= ((ArmorItemWithExpansions) armorPiece.getItem()).getSpeedModifier(armorPiece);
+            }
+        }
+        return speed;
+    }
+
+    public static float getTotalDamageAbsorbtion(PlayerEntity player) {
+        float armor = 0;
+        for (ItemStack armorPiece : player.getInventory().armor){
+            if (armorPiece.getItem() instanceof ArmorItemWithExpansions){
+                armor += ((ArmorItemWithExpansions) armorPiece.getItem()).getDamageAbsorbtion(armorPiece);
+            }
+        }
+        return armor;
+    }
+
     public static float getArmorWheight(PlayerEntity player) {
         float cummulativeWheight = 0;
         for (ItemStack stack : player.getInventory().armor){
             if (stack.getItem() instanceof ArmorItemWithExpansions){
-                cummulativeWheight += ((ArmorItemWithExpansions) stack.getItem()).getArmorWheight();
+                cummulativeWheight += ((ArmorItemWithExpansions) stack.getItem()).getArmorWeight(stack);
             }else if (!stack.isEmpty()){
                 cummulativeWheight += 1;
             }
