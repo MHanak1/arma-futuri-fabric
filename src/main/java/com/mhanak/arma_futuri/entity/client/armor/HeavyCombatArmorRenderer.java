@@ -7,6 +7,6 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class HeavyCombatArmorRenderer extends GeoArmorRenderer<LightCombatArmorItem> {
     public HeavyCombatArmorRenderer() {
-        super(new DefaultedItemGeoModel<>(ArmaFuturiMod.path("armor/light_combat_armor")));
+        super(new DefaultedItemGeoModel<>(ArmaFuturiMod.path("armor/heavy_combat_armor")));
     }
 }

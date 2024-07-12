@@ -1,6 +1,6 @@
 package com.mhanak.arma_futuri.item.armor;
 
-import com.mhanak.arma_futuri.entity.client.armor.LightCombatArmorRenderer;
+import com.mhanak.arma_futuri.entity.client.armor.HeavyCombatArmorRenderer;
 import com.mhanak.arma_futuri.item.ArmorItemWithExpansions;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
@@ -93,7 +93,7 @@ public final class HeavyCombatArmorItem extends ArmorItemWithExpansions implemen
             @Override
             public @NotNull BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
                 if (this.renderer == null)
-                    this.renderer = new LightCombatArmorRenderer();
+                    this.renderer = new HeavyCombatArmorRenderer();
 
                 // This prepares our GeoArmorRenderer for the current render frame.
                 // These parameters may be null however, so we don't do anything further with them
