@@ -9,7 +9,7 @@ public class FlashlightUpgrade extends ExpansionItem {
     }
 
     public boolean canBeEquippedOn(EquipmentSlot slot) {
-        return slot == EquipmentSlot.CHEST;
+        return slot == EquipmentSlot.HEAD;
     }
 
 }

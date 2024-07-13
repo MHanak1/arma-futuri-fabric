@@ -18,7 +18,8 @@
     "client.InGameHudMixin",
     "client.MinecraftClientMixin",
     "client.MouseMixin",
-    "client.PlayerEntityRendererMixin"
+    "client.PlayerEntityRendererMixin",
+    "client.LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
