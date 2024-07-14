@@ -38,10 +38,10 @@ public class HeavyCombatMaterial implements ArmorMaterial {
                 return 8;
             }
             case LEGGINGS -> {
-                return 7;
+                return 6;
             }
             case BOOTS -> {
-                return 4;
+                return 3;
             }
         }
         return 0;

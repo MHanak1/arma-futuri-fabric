@@ -42,6 +42,7 @@ public class ModItems {
     public static void bootstrap() {
 
         ExpansionItems.register("jetpack", ExpansionItems.JETPACK);
+        ExpansionItems.register("fuel_tank", ExpansionItems.FUEL_TANK);
         ExpansionItems.register("shield_module", ExpansionItems.SHIELD_MODULE);
         ExpansionItems.register("flashlight_upgrade", ExpansionItems.FLASHLIGHT_UPGRADE);
         ExpansionItems.register("armor_reinforcement", ExpansionItems.ARMOR_REINFORCEMENT_UPGRADE);

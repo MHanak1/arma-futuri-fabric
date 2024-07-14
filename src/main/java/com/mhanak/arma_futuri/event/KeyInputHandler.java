@@ -39,7 +39,7 @@ public class KeyInputHandler {
                 if (client.options.attackKey.isPressed() && !attackPressed){
                     Item item = client.player.getMainHandStack().getItem();
                     if (item instanceof WeaponItem) {
-                        if (((WeaponItem) item).canShoot(client.player.getMainHandStack(), client.player)) {
+                        if (((WeaponItem) item).canShoot(client.player.getMainHandStack(), client.player) && !client.player.isSpectator()){
                             ((WeaponItem) item).shootAsShooter(client.world, client.player, client.player.getMainHandStack());
                         }
                         if (!((WeaponItem)item).isAutomatic() || (client.player.getInventory().selectedSlot != 0 && !((WeaponItem) item).isSidearm())) {

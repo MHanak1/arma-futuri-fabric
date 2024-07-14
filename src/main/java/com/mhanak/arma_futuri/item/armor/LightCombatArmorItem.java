@@ -13,6 +13,8 @@ import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -20,7 +22,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public final class LightCombatArmorItem extends ArmorItemWithExpansions implements GeoItem {
+public final class LightCombatArmorItem extends ArmorItemWithExpansions  {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
@@ -69,7 +71,7 @@ public final class LightCombatArmorItem extends ArmorItemWithExpansions implemen
                 return 0.7f;
             }
             case BOOTS -> {
-                return 0.4f;
+                return 0.2f;
             }
         }
         return 0;
@@ -120,13 +122,14 @@ public final class LightCombatArmorItem extends ArmorItemWithExpansions implemen
         return this.renderProvider;
     }
 
-    // Let's add our animation controller
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, 20, state -> PlayState.CONTINUE));
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
     }
+
 }

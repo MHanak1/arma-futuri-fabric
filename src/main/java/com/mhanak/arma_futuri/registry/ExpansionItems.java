@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ExpansionItems {
     public static final ExpansionItem JETPACK = new JetpackItem(new Item.Settings());
+    public static final ExpansionItem FUEL_TANK = new FuelTankUpgrade(new Item.Settings());
     public static final ExpansionItem SHIELD_MODULE = new ShieldModuleItem(new Item.Settings());
     public static final ExpansionItem FLASHLIGHT_UPGRADE = new FlashlightUpgrade(new Item.Settings());
     public static final ExpansionItem ARMOR_REINFORCEMENT_UPGRADE = new ArmorReinforcementUpgrade(new Item.Settings());

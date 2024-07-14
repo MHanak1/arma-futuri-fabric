@@ -7,18 +7,22 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ArmorItemWithExpansions extends ArmorItem {
+public abstract class ArmorItemWithExpansions extends ArmorItem implements GeoItem, DyeableItem {
 
     public abstract int getExpansionSlots(ArmorItem.Type type);
 
@@ -36,6 +40,15 @@ public abstract class ArmorItemWithExpansions extends ArmorItem {
 
     public ArmorItemWithExpansions(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
+    }
+
+    @Override
+    public int getColor(ItemStack stack) {
+        NbtCompound nbtCompound = stack.getSubNbt(DISPLAY_KEY);
+        if (nbtCompound != null && nbtCompound.contains(COLOR_KEY, NbtElement.NUMBER_TYPE)) {
+            return nbtCompound.getInt(COLOR_KEY);
+        }
+        return 0xFFFFFFFF;
     }
 
     @Override

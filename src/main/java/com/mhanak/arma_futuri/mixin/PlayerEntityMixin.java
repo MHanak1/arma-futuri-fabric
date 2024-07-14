@@ -15,13 +15,18 @@ import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.MathHelper;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,6 +36,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
+    @Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
+
+    @Shadow @Final private PlayerInventory inventory;
+    private ItemStack lastMainWeapon = ItemStack.EMPTY;
+
     @Unique
     @Environment(EnvType.CLIENT)
     private SoundInstance jetpackSound;
@@ -38,7 +48,11 @@ public abstract class PlayerEntityMixin {
     @ModifyArg(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"), index = 1)
     float modifyDamage(DamageSource source, float amount) {
         if (source.isIn(DamageTypeTags.BYPASSES_ARMOR) || source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) return amount;
-        return MathHelper.clamp(amount-ArmorData.getTotalDamageAbsorbtion((PlayerEntity) (Object)this), 0, 100000);
+        float newAmount = amount - ArmorData.getTotalDamageAbsorbtion((PlayerEntity) (Object)this);
+        if (source.isOf(DamageTypes.LAVA)){
+            newAmount = newAmount/2 + amount/2;
+        }
+        return MathHelper.clamp(newAmount, 0, 100000);
     }
 
     @ModifyReturnValue(method = "getBlockBreakingSpeed", at = @At(value = "RETURN"))
@@ -76,7 +90,13 @@ public abstract class PlayerEntityMixin {
         float fuel = ArmorData.getJetpackFuel((IEntityAccess) this);
         float maxFuel = ArmorData.getMaxFuel(player);
 
-        if (ArmorItemWithExpansions.hasExpansion((Entity) (Object) this, ExpansionItems.JETPACK) && fuel > 0 && !player.isSwimming() && !(player.isOnGround() && !player.getAbilities().flying)) {
+        if (inventory.main.get(0) != lastMainWeapon){
+            ArmorData.setWeaponEnergy((IEntityAccess) this, (ArmorData.getMaxWeaponEnergy((IEntityAccess) player) / -2f));
+        }
+        lastMainWeapon = inventory.main.get(0);
+
+
+        if (ArmorItemWithExpansions.hasExpansion((Entity) (Object) this, ExpansionItems.JETPACK) && fuel > 0 && !player.isSwimming() && !player.isOnGround() && !player.getAbilities().flying) {
             if (ArmorData.getJetpackActive((IEntityAccess) this)) {
                 if (player.getVelocity().y < getMaxJetpackVelocity()) {
                     if (player.getVelocity().y < 0) {
@@ -87,6 +107,7 @@ public abstract class PlayerEntityMixin {
                 }
                 player.limitFallDistance();
                 ArmorData.setJetpackFuel((IEntityAccess) this, fuel - (0.5f * ArmorData.getArmorWheight(player)));
+
                 if (player.getWorld().isClient) makeJetpackSound();
             } else if (player.isSneaking()) {
                 double VFall = player.getVelocity().y + 0.12;
@@ -157,7 +178,9 @@ public abstract class PlayerEntityMixin {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (!player.isOnGround()){
             ArmorData.setJetpackActive((IEntityAccess) player, true);
-            cir.setReturnValue(false);
+            if (ArmorItemWithExpansions.hasExpansion((Entity) (Object) this, ExpansionItems.JETPACK)) {
+                cir.setReturnValue(false);
+            }
         }
     }
 

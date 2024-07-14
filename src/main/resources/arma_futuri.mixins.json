@@ -8,6 +8,7 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "PlayerInventoryMixin",
+    "ServerPlayNetworkHandlerMixin",
     "SlotMixin"
   ],
   "client": [
@@ -16,10 +17,10 @@
     "client.EntityRendererMixin",
     "client.HeldItemRendererMixin",
     "client.InGameHudMixin",
+    "client.LivingEntityMixin",
     "client.MinecraftClientMixin",
     "client.MouseMixin",
-    "client.PlayerEntityRendererMixin",
-    "client.LivingEntityMixin"
+    "client.PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -125,7 +125,7 @@ public class InGameHudMixin {
 
     private static void drawBar(DrawContext drawContext, int x, int y, float fillPercentage, int color){
         drawContext.fill(x, y, x+9, y-40, 0, 0xFF222222);
-        drawContext.fill(x, y - (int) (40*fillPercentage) , x+9, y,0, color);
+        drawContext.fill(x, y - (int) (40*MathHelper.clamp(fillPercentage, 0, 1)) , x+9, y,0, color);
         drawContext.drawBorder(x, y-40, 9, 40, 0xFF000000);
     }
 

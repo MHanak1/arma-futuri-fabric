@@ -15,7 +15,7 @@ public class ArmorReinforcementUpgrade extends ExpansionItem {
 
     @Override
     public float addsProtection() {
-        return 1f;
+        return 0.7f;
     }
 
     public float speedModifier() {

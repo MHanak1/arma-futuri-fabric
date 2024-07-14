@@ -19,18 +19,19 @@ public class ShootC2SPacket {
         float distance = buf.readFloat();
         boolean hitHead = buf.readBoolean();
 
-        if (distance == 0){
-            for (PlayerEntity other_player : player.getWorld().getPlayers()){
-                PacketByteBuf buffer = PacketByteBufs.create();
-                buffer.writeUuid(player.getUuid());
+        if (!player.isSpectator()) {
+            if (distance == 0) {
+                for (PlayerEntity other_player : player.getWorld().getPlayers()) {
+                    PacketByteBuf buffer = PacketByteBufs.create();
+                    buffer.writeUuid(player.getUuid());
 
-                if (player != other_player) {
-                    ServerPlayNetworking.send((ServerPlayerEntity) other_player, ModPackets.SHOOT_SYNC_ID, buffer);
+                    if (player != other_player) {
+                        ServerPlayNetworking.send((ServerPlayerEntity) other_player, ModPackets.SHOOT_SYNC_ID, buffer);
+                    }
                 }
+            } else if (player.getStackInHand(player.getActiveHand()).getItem() instanceof WeaponItem && hitEntity != null) {
+                ((WeaponItem) player.getStackInHand(player.getActiveHand()).getItem()).revieveShotAsServer(player, hitEntity, distance, hitHead);
             }
-        }else if (player.getStackInHand(player.getActiveHand()).getItem() instanceof WeaponItem && hitEntity != null){
-            ((WeaponItem) player.getStackInHand(player.getActiveHand()).getItem()).revieveShotAsServer( player, hitEntity, distance, hitHead);
         }
-
     }
 }
