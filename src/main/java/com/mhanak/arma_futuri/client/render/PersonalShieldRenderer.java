@@ -1,7 +1,6 @@
 package com.mhanak.arma_futuri.client.render;
 
 import com.mhanak.arma_futuri.ArmaFuturiMod;
-
 import com.mhanak.arma_futuri.entity.client.ModModelLayers;
 import com.mhanak.arma_futuri.entity.client.PersonalShieldModel;
 import com.mhanak.arma_futuri.entity.custom.PersonalShieldEntity;
@@ -16,12 +15,15 @@ import foundry.veil.api.client.render.shader.program.ShaderProgram;
 import foundry.veil.api.event.VeilRenderLevelStageEvent;
 import foundry.veil.fabric.event.FabricVeilRenderLevelStageEvent;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 public class PersonalShieldRenderer extends LivingEntityRenderer<PersonalShieldEntity, PersonalShieldModel<PersonalShieldEntity>> {
@@ -42,47 +44,44 @@ public class PersonalShieldRenderer extends LivingEntityRenderer<PersonalShieldE
         }else {
             pos = livingEntity.getPos();
         }
+
         //build mesh, probably a better way to do this
         Matrix4f pose = matrixStack.peek().getPositionMatrix();
-        Tessellator tesselator = Tessellator.getInstance();
-        BufferBuilder builder = tesselator.getBuffer();
-        builder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION);
+        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(ModRenderTypes.shield());
         float s = 1.0f + livingEntity.getHealth()/livingEntity.getMaxHealth()/4;
 
+        vertexConsumer.vertex( -s, 0, s).next();
+        vertexConsumer.vertex( s, 0, s).next();
+        vertexConsumer.vertex( s, 2*s, s).next();
+        vertexConsumer.vertex(-s, 2*s, s).next();
 
-        builder.vertex(-s, 0, s).next();
-        builder.vertex( s, 0, s).next();
-        builder.vertex( s, 2*s, s).next();
-        builder.vertex(-s, 2*s, s).next();
+        vertexConsumer.vertex(-s, 2*s, -s).next();
+        vertexConsumer.vertex( s, 2*s, -s).next();
+        vertexConsumer.vertex( s, 0, -s).next();
+        vertexConsumer.vertex(-s, 0, -s).next();
 
-        builder.vertex(-s, 2*s, -s).next();
-        builder.vertex( s, 2*s, -s).next();
-        builder.vertex( s, 0, -s).next();
-        builder.vertex(-s, 0, -s).next();
-
-        builder.vertex(-s, 0, -s).next();
-        builder.vertex( s, 0, -s).next();
-        builder.vertex( s, 0, s).next();
-        builder.vertex(-s, 0, s).next();
-
-
-        builder.vertex( s, 2*s, -s).next();
-        builder.vertex(-s, 2*s, -s).next();
-        builder.vertex(-s, 2*s, s).next();
-        builder.vertex( s, 2*s, s).next();
-
-        builder.vertex( s, 2*s, -s).next();
-        builder.vertex( s, 2*s, s).next();
-        builder.vertex( s, 0, s).next();
-        builder.vertex( s, 0, -s).next();
-
-        builder.vertex(-s, 0, -s).next();
-        builder.vertex(-s, 0, s).next();
-        builder.vertex(-s, 2*s, s).next();
-        builder.vertex(-s, 2*s, -s).next();
+        vertexConsumer.vertex(-s, 0, -s).next();
+        vertexConsumer.vertex( s, 0, -s).next();
+        vertexConsumer.vertex( s, 0, s).next();
+        vertexConsumer.vertex(-s, 0, s).next();
 
 
-        RenderSystem.setShaderColor(0.9F, 0.9F, 0.9F, 0.5F); //no idea what it does
+        vertexConsumer.vertex( s, 2*s, -s).next();
+        vertexConsumer.vertex(-s, 2*s, -s).next();
+        vertexConsumer.vertex(-s, 2*s, s).next();
+        vertexConsumer.vertex( s, 2*s, s).next();
+
+        vertexConsumer.vertex( s, 2*s, -s).next();
+        vertexConsumer.vertex( s, 2*s, s).next();
+        vertexConsumer.vertex( s, 0, s).next();
+        vertexConsumer.vertex( s, 0, -s).next();
+
+        vertexConsumer.vertex(-s, 0, -s).next();
+        vertexConsumer.vertex(-s, 0, s).next();
+        vertexConsumer.vertex(-s, 2*s, s).next();
+        vertexConsumer.vertex(-s, 2*s, -s).next();
+
+        //RenderSystem.setShaderColor(0.9F, 0.9F, 0.9F, 0.5F); //no idea what it does
 
 
 
@@ -95,11 +94,6 @@ public class PersonalShieldRenderer extends LivingEntityRenderer<PersonalShieldE
         }
         shader.bind();
 
-        shader.setVector( "spherePos", (float) pos.x, (float) pos.y, (float) pos.z);
-        shader.setFloat("sphereSize", s);
-        shader.setMatrix("modelViewMat", pose);
-
-
         //do the funee hit effect thing
         float opacity =  1.5F - (float) (livingEntity.maxHurtTime - livingEntity.hurtTime) /livingEntity.maxHurtTime*0.5f;
 
@@ -111,17 +105,21 @@ public class PersonalShieldRenderer extends LivingEntityRenderer<PersonalShieldE
 
         shader.setFloat("opacity", opacity);
 
-        //set the depth texture as a shader texture so the shader can access it
-        RenderSystem.setShaderTexture(0, MinecraftClient.getInstance().getFramebuffer().getDepthAttachment());
+        shader.setVector( "spherePos", (float) pos.x, (float) pos.y, (float) pos.z);
+        shader.setFloat("sphereSize", s);
+        shader.setMatrix("modelViewMat", pose);
 
-        //actually draw the f-er
-        ModRenderTypes.shield().draw(builder, RenderSystem.getVertexSorting());
-
-
+        //if (VeilDeferredRenderer.isSupported()){
+            //RenderSystem.setShaderTexture(0, VeilDeferredRenderer);
+        //}else {
+            RenderSystem.setShaderTexture(0, MinecraftClient.getInstance().getFramebuffer().getDepthAttachment());
+        //}
         ShaderProgram.unbind();
 
+        //matrixStack.pop();
+
         //as i said mystery fuction;
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         //deffered light for G L O W  (totally not stolen from @idothehax)
         if ( VeilRenderSystem.renderer().getDeferredRenderer().isEnabled()){
@@ -151,6 +149,12 @@ public class PersonalShieldRenderer extends LivingEntityRenderer<PersonalShieldE
                 });
             }
         }
+    }
+
+    @Nullable
+    @Override
+    protected RenderLayer getRenderLayer(PersonalShieldEntity entity, boolean showBody, boolean translucent, boolean showOutline) {
+        return ModRenderTypes.shield();
     }
 
     @Override

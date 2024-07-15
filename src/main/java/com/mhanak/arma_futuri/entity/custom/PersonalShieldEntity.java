@@ -123,6 +123,7 @@ public class PersonalShieldEntity extends PassiveEntity  {
         this.updatePassengerPosition(passenger, Entity::setPosition);
     }
 
+
     protected void updateAttachedEntityPosition(Entity passenger, PositionUpdater positionUpdater) {
         if (!this.hasPassenger(passenger)) {
             return;

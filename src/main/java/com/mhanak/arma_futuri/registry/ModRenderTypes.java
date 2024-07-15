@@ -2,7 +2,6 @@ package com.mhanak.arma_futuri.registry;
 
 import com.mhanak.arma_futuri.ArmaFuturiMod;
 import foundry.veil.api.client.render.VeilRenderBridge;
-
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;
@@ -41,8 +40,8 @@ public final class ModRenderTypes extends RenderLayer {
                     //.overlay(Overlay.ENABLE_OVERLAY_COLOR)
                     //.cull(Cull.DISABLE_CULLING)
                     .transparency(Transparency.TRANSLUCENT_TRANSPARENCY)
-                    .target(Target.TRANSLUCENT_TARGET)
-                    .build(true)
+                    .target(Target.CLOUDS_TARGET)
+                    .build(false)
     );
 
 

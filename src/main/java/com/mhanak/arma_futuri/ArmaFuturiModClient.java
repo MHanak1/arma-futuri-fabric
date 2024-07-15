@@ -2,10 +2,8 @@ package com.mhanak.arma_futuri;
 
 import com.mhanak.arma_futuri.client.render.MirrorBlockEntityRenderer;
 import com.mhanak.arma_futuri.client.render.PersonalShieldRenderer;
-import com.mhanak.arma_futuri.client.render.RifleProjectileRenderer;
 import com.mhanak.arma_futuri.entity.client.ModModelLayers;
 import com.mhanak.arma_futuri.entity.client.PersonalShieldModel;
-import com.mhanak.arma_futuri.entity.client.RifleProjectileEntityModel;
 import com.mhanak.arma_futuri.event.KeyInputHandler;
 import com.mhanak.arma_futuri.networking.ModPackets;
 import com.mhanak.arma_futuri.registry.ModBlocks;
@@ -30,8 +28,8 @@ public class ArmaFuturiModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.PERSONAL_SHIELD, PersonalShieldRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PERSONAL_SHIELD, PersonalShieldModel::getTexturedModelData);
 
-        EntityRendererRegistry.register(ModEntities.RIFLE_PROJECTILE, RifleProjectileRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.RIFLE_PROJECTILE, RifleProjectileEntityModel::getTexturedModelData);
+        //EntityRendererRegistry.register(ModEntities.RIFLE_PROJECTILE, RifleProjectileRenderer::new);
+        //EntityModelLayerRegistry.registerModelLayer(ModModelLayers.RIFLE_PROJECTILE, RifleProjectileEntityModel::getTexturedModelData);
 
         //BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.MAP, new SimpleBlockItemRenderer(new MapBlockEntity(BlockPos.ORIGIN, ModBlocks.MAP.getDefaultState())));
        // BlockEntityRendererFactories.register(ModBlocks.MAP_BE, MapBlockEntityRenderer::new);
